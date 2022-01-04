@@ -12,6 +12,11 @@ int32_t main(int32_t argc, char *argv[])
 		return 0;
 	}
 
+	FILE *mem_file = fopen(argv[1], "r");
+
+
+
+
 	fd = open(argv[1], O_RDONLY|O_SYNC);
 	if(fd<0) {
 		printf("Error %d Unable to open %s\n", fd, argv[1]);
@@ -56,6 +61,8 @@ int32_t main(int32_t argc, char *argv[])
 		 */
 		disassemble64(fd, eh64, sh_tbl);
 
+
+
 	} else{
 		Elf32_Shdr* sh_tbl;	/* section-header table is variable size */
 		print_elf_header(eh);
@@ -85,6 +92,10 @@ int32_t main(int32_t argc, char *argv[])
 		 * Currently supports ARMv7
 		 */
 		disassemble(fd, eh, sh_tbl);
+
+		//void read_sections(FILE* fp,Elf32_Ehdr* elfhead, Elf32_Shdr* elf_shdr);
+		read_sections(mem_file, &eh, sh_tbl);
+
 	}
 
 	return 0;

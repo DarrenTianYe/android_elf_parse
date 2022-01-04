@@ -14,6 +14,10 @@
 #define debug(...) \
             do { if (DEBUG) printf("<debug>:"__VA_ARGS__); } while (0)
 
+
+void read_sections(FILE* fp,Elf32_Ehdr* elfhead, Elf32_Shdr* elf_shdr);
+
+
 void disassemble(int32_t fd, Elf32_Ehdr eh, Elf32_Shdr* sh_tbl);
 void disassemble64(int32_t fd, Elf64_Ehdr eh, Elf64_Shdr* sh_tbl);
 void read_elf_header64(int32_t fd, Elf64_Ehdr *elf_header);
